@@ -33,6 +33,21 @@ app.post("/api/insert", (req, res) => {
     })
 })
 
+app.delete('/api/delete/:sportName', (req, res ) => {
+    const name = req.params.sportName;
+    const sqlDelete = "DELETE FROM sport_review WHERE sportName = ?";
+    db.query(sqlDelete, name, (err, result) => {
+        if (err) console.log(err);
+    })
+})
+app.put('/api/update', (req, res ) => {
+    const name = req.body.sportName;
+    const review = req.body.sportReview;
+    const sqlUpdate = "UPDATE sport_review SET sportReview = ? WHERE sportName = ?";
+    db.query(sqlUpdate, [review, name], (err, result) => {
+        if (err) console.log(err);
+    })
+})
 
 
 app.listen(3001, () => {
