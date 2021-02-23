@@ -47,6 +47,7 @@ app.put('/api/update', (req, res ) => {
     db.query(sqlUpdate, [review, name], (err, result) => {
         if (err) console.log(err);
     })
+    
 })
 
 

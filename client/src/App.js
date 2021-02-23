@@ -28,15 +28,26 @@ function App() {
   }
 
   const deleteReview = (sport) => {
-    Axios.delete(`http://localhost:3001/api/delete/${sport}`)
+    Axios.delete(`http://localhost:3001/api/delete/${sport}`).then((response) => {
+      setSportList(
+        sportReviewList.filter((val) =>{
+          return val.sport != sport;
+        })
+      )
+    })
   }
 
   const updateReview = (sport) => {
     Axios.put('http://localhost:3001/api/update', {
       sportName: sport,
       sportReview: newReview,
-    });
-    setNewReview('')
+    }).then(
+      (response) => {
+        setSportList(sportReviewList.map((val) => {
+          return val.sport == sport ? {sportName: val.sport, sportReview : newReview} : val;
+        }))
+      }
+    )
   }
 
   return (
